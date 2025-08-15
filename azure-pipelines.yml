@@ -1,0 +1,37 @@
+name: $(SourceBranchName)-$(Date:yyyyMMdd)$(Rev:.r)
+
+trigger:
+  - feature/*
+  - release/*
+  - hotfix/*
+  - bugfix/*
+  - develop
+  - master
+
+variables:
+- group: uip-cross-runtecnico
+- ${{ if or( startsWith(variables['Build.SourceBranch'], 'refs/heads/feature'), eq(variables['Build.SourceBranch'], 'refs/heads/develop'), startsWith(variables['Build.SourceBranch'], 'refs/heads/bugfix/')) }}:
+    - group: uip-dev-runtecnico
+- ${{ if or( startsWith(variables['Build.SourceBranch'], 'refs/heads/hotfix/'), startsWith(variables['Build.SourceBranch'], 'refs/heads/release/')) }}:
+    - group: uip-test-runtecnico
+- ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/master') }}:
+    - group: uip-prod-runtecnico
+
+- name: UIPATH_FOLDER_NAME
+  value: 'BP-RPAUi-OrdenanzasJudiciales/BP-RPAUi-ComunicacionesOrdJudiciales'
+
+resources:
+ repositories:
+   - repository: UiPathTemplate
+     type: git
+     name: BP-DevOps-Infrastructure/dvp-tpl-uipath
+     ref: refs/heads/master
+   - repository: JiraLoadCode
+     type: git
+     name: cce-aut-load-jira
+     ref: refs/heads/master
+
+extends:
+  template: init_with_jira.yml@UiPathTemplate
+  parameters:
+    REPOSITORY_JIRA_SCRIPTS: JiraLoadCode
