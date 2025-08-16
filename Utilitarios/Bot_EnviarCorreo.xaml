@@ -1,17 +1,21 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Bot_EnviarCorreo" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:um="clr-namespace:UiPath.Mail;assembly=UiPath.Mail.Activities" xmlns:umab="clr-namespace:UiPath.Mail.Activities.Business;assembly=UiPath.Mail.Activities" xmlns:umabh="clr-namespace:UiPath.Mail.Activities.Business.HtmlEditor;assembly=UiPath.Mail.Activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Bot_EnviarCorreo" this:Bot_EnviarCorreo.in_numIdentificacionCliente="17239992515" this:Bot_EnviarCorreo.in_CorreoDestinatario="garnica_esteban@hotmail.com" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:um="clr-namespace:UiPath.Mail;assembly=UiPath.Mail.Activities" xmlns:umab="clr-namespace:UiPath.Mail.Activities.Business;assembly=UiPath.Mail.Activities" xmlns:umabh="clr-namespace:UiPath.Mail.Activities.Business.HtmlEditor;assembly=UiPath.Mail.Activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
-    <x:Property Name="in_FechaProceso" Type="InArgument(x:Object)" />
+    <x:Property Name="in_NombreCliente" Type="InArgument(x:String)" />
+    <x:Property Name="in_bodyEmail" Type="InArgument(x:String)" />
+    <x:Property Name="in_numIdentificacionCliente" Type="InArgument(x:String)" />
+    <x:Property Name="in_CorreoDestinatario" Type="InArgument(x:String)" />
+    <x:Property Name="in_FolderClient" Type="InArgument(x:String)" />
   </x:Members>
-  <this:Bot_EnviarCorreo.in_FechaProceso>
-    <InArgument x:TypeArguments="x:Object" />
-  </this:Bot_EnviarCorreo.in_FechaProceso>
+  <this:Bot_EnviarCorreo.in_FolderClient>
+    <InArgument x:TypeArguments="x:String" />
+  </this:Bot_EnviarCorreo.in_FolderClient>
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
   <sap:VirtualizedContainerService.HintSize>848.8,1630.4</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Bot_EnviarCorreo_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
-    <scg:List x:TypeArguments="x:String" Capacity="35">
+    <scg:List x:TypeArguments="x:String" Capacity="70">
       <x:String>System.Activities</x:String>
       <x:String>System.Activities.Statements</x:String>
       <x:String>System.Activities.Expressions</x:String>
@@ -47,143 +51,127 @@
       <x:String>UiPath.Shared.Activities</x:String>
       <x:String>UiPath.Mail.Activities.Utils</x:String>
       <x:String>UiPath.Mail.Activities.Business.HtmlEditor</x:String>
+      <x:String>System.Linq.Expressions</x:String>
+      <x:String>UiPath.Mail.Activities</x:String>
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
     <scg:List x:TypeArguments="AssemblyReference" Capacity="70">
+      <AssemblyReference>GlobalVariablesT1PNoYwrqg</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>NPOI.Core</AssemblyReference>
       <AssemblyReference>System</AssemblyReference>
       <AssemblyReference>System.Activities</AssemblyReference>
       <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
       <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
       <AssemblyReference>System.Core</AssemblyReference>
       <AssemblyReference>System.Data</AssemblyReference>
       <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
       <AssemblyReference>System.Drawing</AssemblyReference>
       <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.Linq.Async</AssemblyReference>
       <AssemblyReference>System.Linq.Expressions</AssemblyReference>
       <AssemblyReference>System.Management.Automation</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Memory.Data</AssemblyReference>
       <AssemblyReference>System.ObjectModel</AssemblyReference>
       <AssemblyReference>System.Private.CoreLib</AssemblyReference>
       <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
       <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
       <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
       <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
       <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
       <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
       <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
       <AssemblyReference>System.Xaml</AssemblyReference>
       <AssemblyReference>System.Xml</AssemblyReference>
       <AssemblyReference>System.Xml.Linq</AssemblyReference>
       <AssemblyReference>UiPath.Database.Activities</AssemblyReference>
       <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
       <AssemblyReference>UiPath.Mail</AssemblyReference>
       <AssemblyReference>UiPath.Mail.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities.Design</AssemblyReference>
       <AssemblyReference>UiPath.OCR.Activities</AssemblyReference>
       <AssemblyReference>UiPath.Platform</AssemblyReference>
       <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
       <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
       <AssemblyReference>UiPath.Testing.Activities</AssemblyReference>
       <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
       <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
       <AssemblyReference>UiPath.Word.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Word.Activities.Design</AssemblyReference>
       <AssemblyReference>UiPath.Workflow</AssemblyReference>
-      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
-      <AssemblyReference>System.Memory.Data</AssemblyReference>
-      <AssemblyReference>NPOI</AssemblyReference>
-      <AssemblyReference>System.Console</AssemblyReference>
-      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
-      <AssemblyReference>System.Security.Permissions</AssemblyReference>
-      <AssemblyReference>System.ComponentModel</AssemblyReference>
-      <AssemblyReference>System.Memory</AssemblyReference>
-      <AssemblyReference>System.Private.Uri</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Envio de correo" sap:VirtualizedContainerService.HintSize="654.4,1565.6" sap2010:WorkflowViewState.IdRef="Sequence_5">
+  <Sequence DisplayName="Envio de correo" sap:VirtualizedContainerService.HintSize="1311,1204" sap2010:WorkflowViewState.IdRef="Sequence_5">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:LogMessage DisplayName="Registrar mensaje finaliza inicio" sap:VirtualizedContainerService.HintSize="592,140.8" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;--&gt;Inicia envío de correo electrónico&quot;]" />
-    <Sequence DisplayName="Bot_EnviarCorreo" sap:VirtualizedContainerService.HintSize="592,1336" sap2010:WorkflowViewState.IdRef="Sequence_2">
-      <Sequence.Variables>
-        <Variable x:TypeArguments="x:String" Name="strCorreosCC" />
-        <Variable x:TypeArguments="x:String" Name="strCorreoDestinatario" />
-      </Sequence.Variables>
+    <ui:LogMessage DisplayName="Registrar mensaje inicio" sap:VirtualizedContainerService.HintSize="536,175" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;--&gt;Inicia envío de correo electrónico&quot;]" />
+    <Sequence DisplayName="Bot_EnviarCorreo" sap:VirtualizedContainerService.HintSize="536,840" sap2010:WorkflowViewState.IdRef="Sequence_2">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <ui:GetRobotAsset AssetName="Correo_Destinatario" CacheStrategy="None" DisplayName="Obtener activo destinatario" FolderPath="BP-RPAUi-OrdenanzasJudiciales/BP-RPAUi-ComunicacionesOrdJudiciales" sap:VirtualizedContainerService.HintSize="529.6,174.4" sap2010:WorkflowViewState.IdRef="GetRobotAsset_3">
-        <ui:GetRobotAsset.TimeoutMS>
-          <InArgument x:TypeArguments="x:Int32" />
-        </ui:GetRobotAsset.TimeoutMS>
-        <ui:GetRobotAsset.Value>
-          <OutArgument x:TypeArguments="x:String">[strCorreoDestinatario]</OutArgument>
-        </ui:GetRobotAsset.Value>
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </ui:GetRobotAsset>
-      <ui:GetRobotAsset AssetName="Correos_CC" CacheStrategy="None" DisplayName="Obtener activo CC" FolderPath="BP-RPAUi-OrdenanzasJudiciales/BP-RPAUi-ComunicacionesOrdJudiciales" sap:VirtualizedContainerService.HintSize="529.6,174.4" sap2010:WorkflowViewState.IdRef="GetRobotAsset_2">
-        <ui:GetRobotAsset.TimeoutMS>
-          <InArgument x:TypeArguments="x:Int32" />
-        </ui:GetRobotAsset.TimeoutMS>
-        <ui:GetRobotAsset.Value>
-          <OutArgument x:TypeArguments="x:String">[strCorreosCC]</OutArgument>
-        </ui:GetRobotAsset.Value>
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </ui:GetRobotAsset>
-      <umab:ExchangeApplicationCard Account="{x:Null}" ApplicationId="{x:Null}" EmailAddress="{x:Null}" SharedMailbox="{x:Null}" TenantId="{x:Null}" ConnectionAccountName="uspc0113@pichincha.com" ConnectionId="7527ad20-c96e-4291-b961-8741bef6d0f8" DisplayName="Utilizar Outlook 365 0113" sap:VirtualizedContainerService.HintSize="529.6,875.2" sap2010:WorkflowViewState.IdRef="ExchangeApplicationCard_2" UseConnectionService="True">
+      <umab:ExchangeApplicationCard ConnectionAccountName="{x:Null}" ConnectionId="{x:Null}" SharedMailbox="{x:Null}" Account="estebangarnica@any2cloud.com" DisplayName="Utilizar Outlook 365 - personal" EmailAddress="estebangarnica@any2cloud.com" sap:VirtualizedContainerService.HintSize="502,748" sap2010:WorkflowViewState.IdRef="ExchangeApplicationCard_3" UseConnectionService="False">
+        <umab:ExchangeApplicationCard.ApplicationId>
+          <InArgument x:TypeArguments="x:String">
+            <Literal x:TypeArguments="x:String" Value="" />
+          </InArgument>
+        </umab:ExchangeApplicationCard.ApplicationId>
         <umab:ExchangeApplicationCard.Body>
           <ActivityAction x:TypeArguments="um:IMailQuickHandle">
             <ActivityAction.Argument>
               <DelegateInArgument x:TypeArguments="um:IMailQuickHandle" Name="Exchange" />
             </ActivityAction.Argument>
-            <Sequence DisplayName="Hacer envio" sap:VirtualizedContainerService.HintSize="496,627.2" sap2010:WorkflowViewState.IdRef="Sequence_4">
+            <Sequence DisplayName="Hacer" sap:VirtualizedContainerService.HintSize="468,497" sap2010:WorkflowViewState.IdRef="Sequence_6">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
-              <umab:SendMailX Bcc="{x:Null}" Body="{x:Null}" HtmlBodyFromText="{x:Null}" ReplyTo="{x:Null}" Account="[Exchange]" Cc="[strCorreosCC]" DisplayName="Enviar correo electrónico final" sap:VirtualizedContainerService.HintSize="433.6,406.4" sap2010:WorkflowViewState.IdRef="SendMailX_3" Importance="Normal" IsDraft="False" MaxBodyDocumentSizeMB="2" Sensitivity="Normal" Subject="NOTIFICACIÓN: OFICIOS DE RETENCIONES SUCESIVAS" To="[strCorreoDestinatario]" UseDocumentAsBody="False">
+              <umab:SendMailX Bcc="{x:Null}" Body="{x:Null}" Cc="{x:Null}" HtmlBodyFromText="{x:Null}" ReplyTo="{x:Null}" Account="[Exchange]" DisplayName="Enviar correo electrónico final" sap:VirtualizedContainerService.HintSize="434,437" sap2010:WorkflowViewState.IdRef="SendMailX_4" Importance="Normal" IsDraft="False" MaxBodyDocumentSizeMB="2" Sensitivity="Normal" Subject="[&quot;NOTIFICACIÓN CITACIONES PENDIENTE &quot;+in_numIdentificacionCliente+&quot; MULTAS TRANSITO&quot;]" To="[in_CorreoDestinatario]" UseDocumentAsBody="False">
                 <umab:SendMailX.Files>
-                  <scg:List x:TypeArguments="InArgument(x:String)" Capacity="0" />
+                  <scg:List x:TypeArguments="InArgument(x:String)" Capacity="1">
+                    <InArgument x:TypeArguments="x:String">[in_FolderClient]</InArgument>
+                  </scg:List>
                 </umab:SendMailX.Files>
                 <umab:SendMailX.HtmlBodyFromFile>
-                  <umabh:HtmlContentArgument FilePath=".data/HtmlContent0.html">
+                  <umabh:HtmlContentArgument HtmlBody="{x:Null}" FilePath=".data/HtmlContent0.html">
                     <umabh:HtmlContentArgument.RuntimeImages>
                       <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
                     </umabh:HtmlContentArgument.RuntimeImages>
                     <umabh:HtmlContentArgument.ValueMappings>
                       <scg:List x:TypeArguments="umabh:HtmlValueMappingBase" Capacity="4">
-                        <umabh:HtmlTextValueMapping Name="FechaProceso" Value="[in_FechaProceso]" />
+                        <umabh:HtmlTextValueMapping Name="NombreCliente" Value="[in_NombreCliente]" />
+                        <umabh:HtmlTextValueMapping Name="Body" Value="[in_bodyEmail]" />
                       </scg:List>
                     </umabh:HtmlContentArgument.ValueMappings>
                   </umabh:HtmlContentArgument>
                 </umab:SendMailX.HtmlBodyFromFile>
               </umab:SendMailX>
-              <ui:LogMessage DisplayName="Registrar mensaje finaliza envio" sap:VirtualizedContainerService.HintSize="433.6,132" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;--&gt;Correo de finalización enviado con éxito&quot;]" />
             </Sequence>
           </ActivityAction>
         </umab:ExchangeApplicationCard.Body>
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
+        <umab:ExchangeApplicationCard.TenantId>
+          <InArgument x:TypeArguments="x:String">
+            <Literal x:TypeArguments="x:String" Value="" />
+          </InArgument>
+        </umab:ExchangeApplicationCard.TenantId>
       </umab:ExchangeApplicationCard>
     </Sequence>
+    <ui:LogMessage DisplayName="Registrar mensaje finaliza inicio" sap:VirtualizedContainerService.HintSize="536,166" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[&quot;--&gt;Finaliza envío de correo electrónico&quot;]" />
   </Sequence>
 </Activity>

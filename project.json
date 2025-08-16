@@ -1,24 +1,19 @@
 {
-  "name": "Uipath_RPA_EstebanGarnica",
+  "name": "Uipath_RPA_EstebanGarnica_ConsultaAtm",
   "projectId": "27e8b739-64ce-4694-a745-382f5fc1f9df",
   "description": "Proceso de generación de reporte de citaciones AMT",
   "main": "Main.xaml",
   "dependencies": {
-    "UiPath.DataService.Activities": "[23.4.1]",
-    "UiPath.Excel.Activities": "[2.20.2]",
-    "UiPath.Mail.Activities": "[1.15.2]",
-    "UiPath.System.Activities": "[22.10.3]",
-    "UiPath.Testing.Activities": "[22.10.0]",
-    "UiPath.UIAutomation.Activities": "[22.10.3]",
-    "UiPath.Word.Activities": "[1.13.1]"
+    "UiPath.Database.Activities": "[2.0.0]",
+    "UiPath.Excel.Activities": "[3.2.1]",
+    "UiPath.Mail.Activities": "[2.3.10]",
+    "UiPath.System.Activities": "[25.8.0]",
+    "UiPath.Testing.Activities": "[25.4.1]",
+    "UiPath.UIAutomation.Activities": "[25.10.13]",
+    "UiPath.Word.Activities": "[2.2.0]"
   },
   "webServices": [],
-  "entitiesStores": [
-    {
-      "serviceDocument": ".entities/EntitiesStore.json",
-      "namespace": "BP_RPAUi_OrdJudComunicaciones_GenerarOficiosUnitarios"
-    }
-  ],
+  "entitiesStores": [],
   "schemaVersion": "4.0",
   "studioVersion": "22.10.3.0",
   "projectVersion": "1.0.16",
